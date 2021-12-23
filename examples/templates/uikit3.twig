@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UIKit 3 example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/css/uikit.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+<div class="uk-container uk-container-small">
+    <h1>UIKit 3 example</h1>
+
+    <div class="uk-width-large">
+        <form action="" method="post">
+
+            {# {% import "@form-uikit3/macros.twig" as form %} #}
+
+
+            {# {{ form.text({ #}
+            {# name: 'fullname', #}
+            {# value: 'Veter Perwimp', #}
+            {# required: true, #}
+            {# label: 'Your full name:', #}
+            {# help: 'Required field is this...', #}
+            {# errors: ['Enter you name please!'], #}
+            {# attributes: { #}
+            {# autofocus: true, #}
+            {# } #}
+            {# }) }} #}
+
+            {% set lib = 'uikit3' %}
+
+            {% include '@form/'~lib~'/text.twig' with {
+                name: 'fullname',
+                value: '',
+                label : 'Your name:',
+                required: true,
+                attributes: {
+                }
+            } %}
+
+            {% include '@form/'~lib~'/text.twig' with {
+                name: 'firstname',
+                value: '',
+                label : 'Your first name:',
+                required: false,
+                attributes: {
+                }
+            } %}
+
+            {% include '@form/'~lib~'/number.twig' with {
+                'name': 'age',
+                'value': '',
+                'label' : 'Your age:',
+                'error': 'Please enter your age',
+                'attributes': {
+                    'min': 12,
+                    'step': 1
+                }
+            } %}
+
+            {% include '@form/'~lib~'/email.twig' with {
+                'name': 'email',
+                'value': '',
+                'label' : 'Your email:',
+                'help': 'We will not send spam...',
+                'attributes': {
+                    'autocomplete': 'off',
+                }
+            } %}
+
+            {% include '@form/'~lib~'/textarea.twig' with {
+                'name': 'message',
+                'value': '',
+                'label' : 'Your message:',
+                'attributes': {
+                    'rows': 3
+                }
+            } %}
+
+            {% include '@form/'~lib~'/select.twig' with {
+                'name': 'yesno',
+                'value': 'yes',
+                'options': {
+                    'no': 'No, thanks',
+                    'yes': 'Yes, please'
+                }
+            } %}
+
+            {# {% include '@form-uikit3/checkboxes.twig' with { #}
+            {# 'name': 'fruit', #}
+            {# 'value': [2,3], #}
+            {# 'label': 'Favourite fruit?', #}
+            {# 'options': { #}
+            {# 1: 'Apple', #}
+            {# 2: 'Pear', #}
+            {# 3: 'Banana', #}
+            {# 4: 'Strawberry' #}
+            {# } #}
+            {# } %} #}
+
+            {# {% include '@form-uikit3/radiobuttons.twig' with { #}
+            {# 'name': 'fruit2', #}
+            {# 'value': 4, #}
+            {# 'label': 'Least favourite fruit?', #}
+            {# 'help': 'Choose only one', #}
+            {# 'options': { #}
+            {# 1: 'Apple', #}
+            {# 2: 'Pear', #}
+            {# 3: 'Banana', #}
+            {# 4: 'Strawberry' #}
+            {# }, #}
+            {# 'error': 'required!' #}
+            {# } %} #}
+
+            {# {% include '@form-uikit3/checkbox.twig' with { #}
+            {# 'name': 'optin', #}
+            {# 'value': 1, #}
+            {# 'label': 'Subscribe newsletter?', #}
+            {# } %} #}
+
+            <p>
+                <button type="submit" class="uk-button uk-button-primary">Submit</button>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

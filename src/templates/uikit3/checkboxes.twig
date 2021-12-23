@@ -1,0 +1,44 @@
+{# required fields #}
+{%- set name = name ?? '' -%}
+
+{# optional fields #}
+{%- set value = value ?? [] -%}
+{%- set error = error ?? '' -%}
+{%- set label = label ?? '' -%}
+{%- set help = help ?? '' -%}
+{%- set class = class ?? 'uk-checkbox' -%}
+{%- set id = id ?? 'field-' ~ name -%}
+{%- set attributes = attributes ?? {} -%}
+
+{%- set options = options ?? {} -%}
+
+{# calculated #}
+{% if error and error is not iterable %}{% set error = [error] %}{% endif %}
+{%- set stateClass = errors|length ? 'uk-form-danger' : (value ? 'uk-form-success':'') -%}
+{%- set class = class ~ ' ' ~ stateClass %}
+
+{% set attributes = attributes|merge({
+    type: 'checkbox',
+    class: class
+}) %}
+
+{%- embed '@form-uikit3/includes/field.twig' -%}
+    {%- block content -%}
+        {% for k,v in options %}
+
+            {% set attributes = attributes|merge({
+                name: name ~ '[]',
+                value: k,
+            }) %}
+
+            <label>
+                <input
+                        {% for k,v in attributes %}{{ k }}="{{ v }}" {% endfor %}
+                        {% if k in value %}checked{% endif %}
+                >
+                {{ v }}
+            </label>
+            {% if not loop.last %}<br>{% endif %}
+        {% endfor %}
+    {%- endblock -%}
+{%- endembed -%}

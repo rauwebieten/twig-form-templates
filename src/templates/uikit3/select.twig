@@ -1,0 +1,42 @@
+{# required fields #}
+{%- set name = name ?? '' -%}
+
+{# optional fields #}
+{%- set value = value ?? '' -%}
+{%- set errors = errors ?? [] -%}
+{%- set label = label ?? '' -%}
+{%- set help = help ?? '' -%}
+{%- set required = required ?? true -%}
+{%- set class = class ?? 'uk-select' -%}
+{%- set id = id ?? 'field-' ~ name -%}
+{%- set attributes = attributes ?? {} -%}
+
+{%- set options = options ?? {} -%}
+
+{# calculated #}
+{% if errors and errors is not iterable %}{% set errors = [errors] %}{% endif %}
+{%- set stateClass = errors|length ? 'uk-form-danger' : '' -%}
+{%- set class = class ~ ' ' ~ stateClass %}
+
+{% set attributes = attributes|merge({
+    type: 'text',
+    id: id,
+    name: name,
+    class: class
+}) %}
+
+{%- embed '@form/uikit3/includes/field.twig' -%}
+    {%- block content -%}
+        <select
+            {% for k,v in attributes %}{{ k }}="{{ v }}" {% endfor %}
+        >
+            <option value=""></option>
+            {% for k,v in options %}
+                <option
+                        {% if k == value %}selected{% endif %}
+                        value="{{ k }}"
+                >{{ v }}</option>
+            {% endfor %}
+        </select>
+    {%- endblock -%}
+{%- endembed -%}

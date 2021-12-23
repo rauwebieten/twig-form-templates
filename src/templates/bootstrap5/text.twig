@@ -1,0 +1,31 @@
+{# required fields #}
+{%- set name = name ?? '' -%}
+
+{# optional fields #}
+{%- set value = value ?? '' -%}
+{%- set errors = errors ?? [] -%}
+{%- set label = label ?? '' -%}
+{%- set help = help ?? '' -%}
+{%- set required = required ?? true -%}
+{%- set class = class ?? 'form-control' -%}
+{%- set id = id ?? 'field-' ~ name -%}
+{%- set attributes = attributes ?? {} -%}
+
+{# calculated #}
+{% if errors and errors is not iterable %}{% set errors = [errors] %}{% endif %}
+{%- set stateClass = errors|length ? 'uk-form-danger' : '' -%}
+{%- set class = class ~ ' ' ~ stateClass %}
+
+{% set attributes = attributes|merge({
+    type: 'text',
+    id: id,
+    name: name,
+    value: value,
+    class: class
+}) %}
+
+{%- embed '@form/bootstrap5/includes/field.twig' -%}
+    {%- block content -%}
+        <input {% for k,v in attributes %}{{ k }}="{{ v }}" {% endfor %}>
+    {%- endblock -%}
+{%- endembed -%}

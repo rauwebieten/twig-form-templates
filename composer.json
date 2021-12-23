@@ -1,0 +1,22 @@
+{
+    "name": "rauwebieten/twig-form-templates",
+    "description": "Twig form templates for bootstrap, uikit",
+    "type": "library",
+    "require": {
+        "twig/twig": "^2.0|^3.0"
+    },
+    "authors": [
+        {
+            "name": "rauwebieten",
+            "email": "rauwe.bieten@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "rauwebieten\\twigformtemplates\\": "src/"
+        }
+    },
+    "require-dev": {
+        "filp/whoops": "^2.14"
+    }
+}

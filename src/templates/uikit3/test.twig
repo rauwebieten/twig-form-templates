@@ -1,0 +1,12 @@
+{%- set name = name ?? '' -%}
+{%- set value = value ?? '' -%}
+
+{%- set attributes = {
+    type: 'text',
+    id: '',
+    class: 'uk-input',
+    name: name,
+    value: value,
+} -%}
+
+<input {{ attributes|tft_attribute_string|raw }} />

@@ -1,0 +1,27 @@
+<div class="uk-margin">
+    {%- if label -%}
+        <label for="{{- id -}}" class="uk-form-label">
+            {{- label -}}
+            {% if not required %}
+                <span class="uk-text-small uk-text-muted uk-text-italic">{{ tft_optional_label() }}</span>
+            {% endif %}
+        </label>
+    {%- endif -%}
+    <div class="uk-form-controls">
+        {% block content %}
+        {% endblock %}
+        {%- if help -%}
+            <div class="uk-text-muted uk-text-small">
+                {{- help -}}
+            </div>
+        {%- endif -%}
+        {%- if errors|length -%}
+            <div class="uk-text-danger uk-text-small">
+                {% for error in errors %}
+                    {{ error }}<br>
+                {% endfor %}
+            </div>
+        {%- endif -%}
+
+    </div>
+</div>
